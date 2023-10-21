@@ -18,6 +18,13 @@ const (
 	// Operator
 	ASSIGN = "="
 	PLUS = "+"
+	MINUS = "-"
+	BANG = "!"
+	ASTERISK = "*"
+	SLASH = "/"
+
+	LT = "<"
+	GT = ">"
 
 	// Decimeter
 	COMMA = ","
@@ -31,6 +38,7 @@ const (
 	// Keyword
 	FUNCTION = "FUNCTION"
 	LET = "LET"
+
 )
 
 var Keywords = map[string]TokenType {
