@@ -22,14 +22,14 @@ const (
 	BANG = "!"
 	ASTERISK = "*"
 	SLASH = "/"
-
 	LT = "<"
 	GT = ">"
+  EQ = "=="
+	NOT_EQ = "!="
 
 	// Decimeter
 	COMMA = ","
 	SEMICOLON = ";"
-
 	LPAREN = "("
 	RPAREN = ")"
 	LBRACE = "{"
