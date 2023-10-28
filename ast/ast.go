@@ -52,6 +52,11 @@ type IntegerLiteral struct {
 	Value int64
 }
 
+type Boolean struct {
+	Token token.Token
+	Value bool
+}
+
 type PrefixExpression struct {
 	Token token.Token
 	Operator string
@@ -164,3 +169,7 @@ func (oe *InfixExpression) String() string {
 
 	return out.String()
 }
+
+func (b *Boolean) expressionNode(){}
+func (b *Boolean) TokenLiteral() string {return b.Token.Literal}
+func (b *Boolean) String() string  {return b.Token.Literal}

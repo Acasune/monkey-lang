@@ -91,12 +91,47 @@ func TestIntegerLiteralExpression(t *testing.T) {
 	if !ok {
 		t.Fatalf("exp not *ast.IntegerLiteral. got=%T", stmt.Expression)
 	}
-	if !ok {
-		t.Fatalf("exp not *ast.IntegerLiteral. got=%T", stmt.Expression)
-	}
 	if literal.TokenLiteral() != "5" {
 		t.Errorf("literal.TokenLiteral not %s. got=%s","5",literal.TokenLiteral())
 	}
+
+}
+
+func TestBooleanExpression(t *testing.T) {
+	booleanTests := []struct {
+		input string
+		expected string
+	} {
+		{"true","true"},
+		{"false","false"},
+	}
+
+	for _, val := range booleanTests {
+		l := lexer.New(val.input)
+		p := New(l)
+		program := p.ParseProgram()
+		checkParserErrors(t,p)
+	
+			if len(program.Statements) != 1 {
+			t.Fatalf("program has not enough statements. got=%d",len(program.Statements))
+		}
+		stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+		if !ok {
+			t.Fatalf("program.Statements[0] is not ast.ExpressionStatement. got=%T", program.Statements[0])
+		}
+	
+		literal, ok := stmt.Expression.(*ast.Boolean)
+		if !ok {
+			t.Fatalf("exp not *ast.Boolean. got=%T", stmt.Expression)
+		}
+	
+		if literal.TokenLiteral() != val.expected {
+			t.Errorf("literal.TokenLiteral not %s. got=%s",val.expected,literal.TokenLiteral())
+		}
+
+
+	}
+
 
 
 }
