@@ -8,8 +8,6 @@ import (
 	"monkey-lang/parser"
 )
 
-
-
 const PROMPT = ">> "
 const MONKEY_FACE = `           __,__
    .--.  .-"   "-.  .--.
@@ -23,6 +21,7 @@ const MONKEY_FACE = `           __,__
         '._'-=-'_.'
           '-----'
 `
+
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 

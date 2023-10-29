@@ -7,10 +7,10 @@ import (
 
 func TestString(t *testing.T) {
 	program := &Program{
-		Statements: []Statement {
+		Statements: []Statement{
 			&LetStatement{
 				Token: token.Token{
-					Type: token.LET,
+					Type:    token.LET,
 					Literal: "let",
 				},
 				Name: &Identifier{
@@ -22,8 +22,8 @@ func TestString(t *testing.T) {
 					Value: "anotherVar",
 				},
 			},
-	  },
-  }
+		},
+	}
 
 	if program.String() != "let myVar = anotherVar;" {
 		t.Errorf("program.String() wrong. got=%q", program.String())
