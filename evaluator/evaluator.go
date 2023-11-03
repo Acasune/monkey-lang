@@ -217,7 +217,7 @@ func evalStringInfixExpression(
 	left, right object.Object,
 ) object.Object {
 	if operator != "+" {
-		return newError("unknown operator: %s %s %s", left.Type(),operator, right.Type())
+		return newError("unknown operator: %s %s %s", left.Type(), operator, right.Type())
 	}
 	leftVal := left.(*object.String).Value
 	rightVal := right.(*object.String).Value
@@ -298,7 +298,7 @@ func evalExpressions(
 
 func applyFunction(fn object.Object, args []object.Object) object.Object {
 
-  switch fn := fn.(type) {
+	switch fn := fn.(type) {
 
 	case *object.Function:
 		extendedEnv := extendFunctionEnv(fn, args)
