@@ -45,6 +45,9 @@ const (
 	RETURN   = "RETURN"
 
 	STRING = "STRING"
+
+	LBRACKET = "["
+	RBRACKET = "]"
 )
 
 var Keywords = map[string]TokenType{
