@@ -67,6 +67,20 @@ func TestEvalBooleanExpression(t *testing.T) {
 	}
 }
 
+func TestStringLiteral(t *testing.T) {
+	input := `"Hello World!"`
+
+	evaluated := testEval(input)
+	str, ok := evaluated.(*object.String)
+	if !ok {
+		t.Fatalf("object is not String. got=%T (%+v)", evaluated, evaluated)
+	}
+
+	if str.Value != "Hello World!" {
+		t.Errorf("String has wrong value. got=%q", str.Value)
+	}
+}
+
 func TestBangOperator(t *testing.T) {
 	tests := []struct {
 		input    string
@@ -242,9 +256,9 @@ func TestFunctionObject(t *testing.T) {
 
 func TestFunctionApplication(t *testing.T) {
 	tests := []struct {
-		input string
+		input    string
 		expected int64
-	} {
+	}{
 		{"let identity = fn(x) {x;}; identity(5)", 5},
 		{"let identity = fn(x) {return x;}; identity(5)", 5},
 		{"let double = fn(x) {x * 2;}; double(2)", 4},
@@ -257,7 +271,6 @@ func TestFunctionApplication(t *testing.T) {
 		testIntegerObject(t, testEval(tt.input), tt.expected)
 	}
 }
-
 
 func testEval(input string) object.Object {
 	l := lexer.New(input)
