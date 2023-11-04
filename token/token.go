@@ -48,6 +48,8 @@ const (
 
 	LBRACKET = "["
 	RBRACKET = "]"
+
+	COLON = ":"
 )
 
 var Keywords = map[string]TokenType{
