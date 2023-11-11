@@ -76,6 +76,9 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		return &object.Function{Parameters: params, Env: env, Body: body}
 
 	case *ast.CallExpression:
+		if node.Function.TokenLiteral() == "quote" {
+			return quote(node.Arguments[0])
+		}
 		function := Eval(node.Function, env)
 		if isError(function) {
 			return function
@@ -381,7 +384,7 @@ func evalArrayIndexExpression(array, index object.Object) object.Object {
 
 }
 
-func evalHashLiteral(node * ast.HashLiteral, env *object.Environment) object.Object {
+func evalHashLiteral(node *ast.HashLiteral, env *object.Environment) object.Object {
 	pairs := make(map[object.HashKey]object.HashPair)
 
 	for keyNode, valueNode := range node.Pairs {

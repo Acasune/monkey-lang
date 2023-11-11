@@ -20,7 +20,8 @@ const (
 	STRING_OBJ       = "STRING"
 	BUILTIN_OBJ      = "BUILTIN"
 	ARRAY_OBJ        = "ARRAY"
-	HASH_OBJ = "HASH"
+	HASH_OBJ         = "HASH"
+	QUOTE_OBJ        = "QUOTE"
 )
 
 type Object interface {
@@ -123,7 +124,7 @@ func (ao *Array) Inspect() string {
 }
 
 type HashKey struct {
-	Type ObjectType
+	Type  ObjectType
 	Value uint64
 }
 
@@ -133,7 +134,7 @@ func (b *Boolean) HashKey() HashKey {
 	if b.Value {
 		value = 1
 	} else {
-		value =0
+		value = 0
 	}
 
 	return HashKey{Type: b.Type(), Value: value}
@@ -151,12 +152,12 @@ func (s *String) HashKey() HashKey {
 }
 
 type HashPair struct {
-	Key Object
+	Key   Object
 	Value Object
 }
 
 type Hash struct {
-	Pairs map[HashKey] HashPair
+	Pairs map[HashKey]HashPair
 }
 
 func (h *Hash) Type() ObjectType { return HASH_OBJ }
@@ -166,9 +167,9 @@ func (h *Hash) Inspect() string {
 
 	pairs := []string{}
 	for _, pair := range h.Pairs {
-		pairs = append(pairs, fmt.Sprintf("%s: %s", pair.Key.Inspect(),pair.Value.Inspect()))
+		pairs = append(pairs, fmt.Sprintf("%s: %s", pair.Key.Inspect(), pair.Value.Inspect()))
 		out.WriteString("{")
-		out.WriteString(strings.Join(pairs,", "))
+		out.WriteString(strings.Join(pairs, ", "))
 		out.WriteString("}")
 	}
 
@@ -177,4 +178,13 @@ func (h *Hash) Inspect() string {
 
 type Hashable interface {
 	HashKey() HashKey
+}
+
+type Quote struct {
+	Node ast.Node
+}
+
+func (q *Quote) Type() ObjectType { return QUOTE_OBJ }
+func (q *Quote) Inspect() string {
+	return "QUOTE(" + q.Node.String() + ")"
 }
