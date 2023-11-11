@@ -50,6 +50,8 @@ const (
 	RBRACKET = "]"
 
 	COLON = ":"
+
+	MACRO = "MACRO"
 )
 
 var Keywords = map[string]TokenType{
@@ -60,6 +62,7 @@ var Keywords = map[string]TokenType{
 	"if":     IF,
 	"else":   ELSE,
 	"return": RETURN,
+	"macro":  MACRO,
 }
 
 func LoopupIdent(ident string) TokenType {
